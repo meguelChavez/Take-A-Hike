@@ -11,5 +11,5 @@ app.use(express.static("public"));
 require('./routes/api-routes')(app)
 
 app.listen(PORT, () => {
-    console.log(` server listening on port https://localhost:${PORT}`);
+    console.log(` server listening on port ${PORT}`);
 })
