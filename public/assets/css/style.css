@@ -27,7 +27,7 @@ html,
 body {
   height: 100%;
   /* background-color: #333; */
-  background-image: url("https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-image: url("../images/pexels-photo-459225.jpeg");
 }
 
 body {
@@ -42,6 +42,9 @@ body {
   max-width: 42em;
 }
 
+.input-group-append {
+  background: #fff;
+}
 /*
  * Header
  */
@@ -79,6 +82,11 @@ body {
   border-radius: 10rem;
   background: #fff;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-menu {
+  /* height: 100px; */
+  overflow: auto;
 }
 .masthead-brand,
 .cover-heading {
