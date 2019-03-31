@@ -1,4 +1,5 @@
-const express = require("express");
+const express = require('express');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -7,9 +8,12 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static("public"));
-require('./routes/api-routes')(app)
+app.use(express.static('public'));
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
+require('./routes/api-routes')(app);
 
 app.listen(PORT, () => {
-    console.log(` server listening on port ${PORT}`);
-})
+  console.log(` server listening on port ${PORT}`);
+});
