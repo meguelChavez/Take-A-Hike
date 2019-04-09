@@ -72,7 +72,6 @@ class SearchBar extends Component {
           <Button className="ml-3">Search</Button>
 
         </InputGroup>
-        <br />
       </div>
     );
   }
