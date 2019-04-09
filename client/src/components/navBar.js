@@ -26,12 +26,12 @@ class NavBar extends Component {
         <div>
         <Navbar  dark expand="sm" className="mb-5">
             <Container>
-                <NavbarBrand href="/" target="_blank">Take-A-Hike</NavbarBrand>
+                <NavbarBrand href="/">Take-A-Hike</NavbarBrand>
                 <NavbarToggler onClick={this.toggle}/>
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink href="https://google.com">Google</NavLink>
+                            <NavLink href="https://google.com"  target="_blank">Google</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>
