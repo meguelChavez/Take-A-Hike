@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -9,9 +10,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static('public'));
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'));
-});
+// app.use((req, res) => {
+//   res.sendFile(path.join(__dirname, './public/index.html'));
+// });
 require('./routes/api-routes')(app);
 
 app.listen(PORT, () => {
