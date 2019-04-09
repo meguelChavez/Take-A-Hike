@@ -20,6 +20,8 @@ class SearchBar extends Component {
     this.toggleSplit = this.toggleSplit.bind(this);
     this.state = {
       stateCode: ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'],
+      chosenSC: "",
+      keyword: "",
       dropdownOpen: false,
       splitButtonOpen: false
     };
@@ -37,35 +39,56 @@ class SearchBar extends Component {
     });
   }
 
+  handleClick = (event) => {
+    console.log(event);
+
+  } 
+
+  handleInputChange = (event) => {
+    console.log(this);
+    console.log(event.target)
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
 
   render() {
     const { stateCode } = this.state;
     return (
       <div>
         <InputGroup>
-          <Input />
+          <Input 
+            value={this.state.keyword}
+            name="keyword" 
+            onChange={this.handleInputChange}
+            placeholder="Keyword (required)"
+          />
           <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
             <DropdownToggle caret>
-              State
+              {this.state.chosenSC ? this.state.chosenSC : "State"}
             </DropdownToggle>
-            <DropdownMenu modifiers={{
-              setMaxHeight: {
-                enabled: true,
-                order: 890,
-                fn: (data) => {
-                  return {
-                    ...data,
-                    styles: {
-                      ...data.styles,
-                      overflow: 'auto',
-                      maxHeight: 100,
-                    },
-                  };
+            <DropdownMenu 
+              modifiers={{
+                setMaxHeight: {
+                  enabled: true,
+                  order: 890,
+                  fn: (data) => {
+                    return {
+                      ...data,
+                      styles: {
+                        ...data.styles,
+                        overflow: 'auto',
+                        maxHeight: 100,
+                      },
+                    };
+                  },
                 },
-              },
-            }}>
+              }}
+            >
               {stateCode.map((element, index) => (
-                < DropdownItem key={index} >  {element} </DropdownItem>
+                < DropdownItem key={index} name="chosenSC" value={element} onClick={this.handleInputChange} >  {element} </DropdownItem>
               ))}
             </DropdownMenu>
           </InputGroupButtonDropdown>
