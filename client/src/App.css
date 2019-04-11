@@ -5,6 +5,7 @@
   text-align: center;
   background-size: contain;
 } */
+
 body{
   height: 100vh;
     background-image: url('./assets/images/daylight-environment-forest-459225.jpg');
@@ -19,7 +20,7 @@ body{
   font-size: 1.75rem;
 }
 
-.navbar-brand, #searchLabel {
+.navbar-brand, #searchLabel, p  {
   color: #fff;
   text-shadow: 2px 2px 4px #000000;
 }
@@ -34,6 +35,31 @@ body{
   font-size: 1.75rem
 }
 
+.card:hover{
+  box-shadow: 10px 10px 18px #000000;
+}
+.card{
+  box-shadow: 5px 10px 8px #000000;
+}
+
+.carousel-caption h3 {
+  font-size: 1.5rem;
+  text-shadow: 5px 5px 10px #000000;
+}
+
+.carousel-item.active{
+  display: flex;
+  justify-content: center
+}
+.parkImg{
+  height: 250px;
+  display: flex !important;
+  justify-content: center
+}
+.parks{
+  display: flex;
+  justify-content: space-around;
+}
 /* .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
