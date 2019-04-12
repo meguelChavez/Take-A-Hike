@@ -11,6 +11,7 @@ class HomePage extends Component {
         stateCode: ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'],
         chosenSC: "",
         keyword: "",
+        isLoading: false,
         parks: []
     }
 
@@ -26,7 +27,7 @@ class HomePage extends Component {
     };
 
     handleSearch = (event) => {
-        console.log(this.props);
+        this.setState({ isLoading: true })
         const { keyword, chosenSC } = this.state;
         console.log("clicked");
         console.log(keyword, chosenSC)
@@ -36,6 +37,7 @@ class HomePage extends Component {
                 chosenSC
             }
         }).then((res) => {
+            this.setState({ isLoading: false })
             const parkArr = res.data.data;
             //   this.props.getParks(parkArr)
             this.setState({ parks: res.data.data });
@@ -46,7 +48,7 @@ class HomePage extends Component {
     }
 
     render() {
-        const { stateCode, keyword, chosenSC } = this.state;
+        const { stateCode, keyword, chosenSC, isLoading } = this.state;
         return (
             <Container>
                 <Row>
@@ -57,6 +59,7 @@ class HomePage extends Component {
                 <Row>
                     <Col sm="12" md={{ size: 8, offset: 2 }}>
                         <SearchBar
+                            loading={isLoading}
                             chosenSC={chosenSC}
                             keyword={keyword}
                             stateCode={stateCode}

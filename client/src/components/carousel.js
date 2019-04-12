@@ -76,7 +76,6 @@ class ImgCarousel extends Component {
 
     render() {
         const { activeIndex } = this.state;
-        console.log(this.props.items)
         const slides = this.props.items.map((item, index) => {
             return (
                 <CarouselItem

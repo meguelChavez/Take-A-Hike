@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LoadingBtn from './loadingBtn';
 import {
   InputGroup,
   InputGroupAddon,
@@ -70,12 +71,23 @@ class SearchBar extends Component {
               }}
             >
               {this.props.stateCode.map((element, index) => (
-                < DropdownItem key={index} name="chosenSC" value={element} onClick={this.props.handleInputChange} >  {element} </DropdownItem>
+                < DropdownItem 
+                  key={index} 
+                  name="chosenSC" 
+                  value={element} 
+                  onClick={this.props.handleInputChange}>
+                    {element} 
+                </DropdownItem>
               ))}
             </DropdownMenu>
           </InputGroupButtonDropdown>
-          <Button className="ml-3 btn-success" onClick={this.props.handleSearch}>Search</Button>
-
+        { this.props.loading ? <LoadingBtn/> :
+          <Button 
+            ref="btn" 
+            className="ml-3 btn-success" 
+            onClick={this.props.handleSearch}
+            >Search
+          </Button>}
         </InputGroup>
       </div>
     );
