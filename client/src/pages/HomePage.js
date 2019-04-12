@@ -12,6 +12,7 @@ class HomePage extends Component {
         chosenSC: "",
         keyword: "",
         isLoading: false,
+        searched: false,
         parks: []
     }
 
@@ -27,7 +28,7 @@ class HomePage extends Component {
     };
 
     handleSearch = (event) => {
-        this.setState({ isLoading: true })
+        this.setState({ isLoading: true, searched: true })
         const { keyword, chosenSC } = this.state;
         console.log("clicked");
         console.log(keyword, chosenSC)
@@ -41,7 +42,7 @@ class HomePage extends Component {
             const parkArr = res.data.data;
             //   this.props.getParks(parkArr)
             this.setState({ parks: res.data.data });
-            console.log(res.data.data);
+            console.log(this.state.parks);
         }).catch((err) => {
             console.log(err);
         })
@@ -74,10 +75,10 @@ class HomePage extends Component {
                     </Col>
                 </Row>
                 <Row className="parks">
-                    {this.state.parks ?
+                    {(this.state.parks.length > 0) ?
                         this.state.parks.map((element, i) => (
                             <ParkCard key={i} park={this.state.parks[i]} />))
-                        : ""}
+                        : (this.state.searched && !isLoading )? <ParkCard/> : ""}
                 </Row>
             </Container>
         );
