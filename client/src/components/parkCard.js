@@ -1,22 +1,12 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import ImgCarousel from './carousel';
 import {
-  Card, CardImg, CardText, CardBody,
+  Card, CardBody,
   CardTitle, CardSubtitle, Button
 } from 'reactstrap';
 
 const parkCard = (props) => {
-  // if (props.park.images) {
-  //   const items = props.park.images.map((element) => (
-  //     {
-  //       src: element.url,
-  //       altText: element.altText,
-  //       caption: element.caption,
-  //       header: element.title
-  //     }
-  //   ));
-  // }
-  console.log(`items ${props}`);
   return (
     <Card className="col-md-4 col-sm-12 mb-5">
       <CardBody>
@@ -31,7 +21,15 @@ const parkCard = (props) => {
                 header: element.title
               }
             ))} />
-            <Button className="btn-success">Learn More</Button>
+            <Link to={{
+              pathname: "/parkinfo",
+              state: {
+                selectedPark: props.park
+              }
+            }}>
+             <Button className="btn-success">Learn More</Button>
+            </Link>
+           
           </React.Fragment>
           )
           : (
@@ -40,12 +38,8 @@ const parkCard = (props) => {
               <CardSubtitle>Try different keyword or state</CardSubtitle>
             </React.Fragment>
           )
-
         }
       </CardBody>
-      {/* quicktime player 
-            imovie
-        */}
     </Card>
   );
 };

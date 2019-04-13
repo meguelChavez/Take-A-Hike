@@ -16,10 +16,6 @@ class HomePage extends Component {
         parks: []
     }
 
-    // getParks = (parkArr) => {
-    //     this.setState({ parks: parkArr });
-    // }
-
     handleInputChange = (event) => {
         const { name, value } = event.target;
         this.setState({
@@ -77,7 +73,7 @@ class HomePage extends Component {
                 <Row className="parks">
                     {(this.state.parks.length > 0) ?
                         this.state.parks.map((element, i) => (
-                            <ParkCard key={i} park={this.state.parks[i]} />))
+                            <ParkCard key={this.state.parks[i].id} park={this.state.parks[i]} />))
                         : (this.state.searched && !isLoading )? <ParkCard/> : ""}
                 </Row>
             </Container>
