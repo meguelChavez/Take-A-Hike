@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import LoadingBtn from './loadingBtn';
 import {
   InputGroup,
-  InputGroupAddon,
   InputGroupButtonDropdown,
-  InputGroupDropdown,
   Input,
   Button,
-  Dropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem
@@ -38,7 +35,6 @@ class SearchBar extends Component {
   }
 
   render() {
-    const { stateCode } = this.state;
     return (
       <div>
         <InputGroup>

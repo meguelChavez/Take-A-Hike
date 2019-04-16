@@ -8,7 +8,7 @@ import {
 
 const parkCard = (props) => {
   return (
-    <Card className="col-md-4 col-sm-12 mb-5">
+    <Card className="col-md-4 col-sm-12 mb-5 parkCard">
       <CardBody>
         {(props.park) ?
           (<React.Fragment>
@@ -24,12 +24,13 @@ const parkCard = (props) => {
             <Link to={{
               pathname: "/parkinfo",
               state: {
-                selectedPark: props.park
+                selectedPark: props.park,
+                images: props.park.images
               }
             }}>
-             <Button className="btn-success">Learn More</Button>
+              <Button className="btn-success">Learn More</Button>
             </Link>
-           
+
           </React.Fragment>
           )
           : (
