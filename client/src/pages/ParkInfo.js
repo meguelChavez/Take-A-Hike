@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import axios from 'axios';
+import { Container, Row, Col, Button } from 'reactstrap';
 import InfoList from '../components/infoList';
-import Address from '../components/address';
+import AdditionalInfo from '../components/additionalInfo';
+import Comments from '../components/comments';
 import ImgModal from '../components/imgModal';
 import ImgCarousel from '../components/carousel';
 import {
@@ -13,6 +15,10 @@ import {
 class ParkInfo extends Component {
 
     state = {
+        selected: "Images",
+        comments: "",
+        allComments: [],
+        userName: "",
         park: {},
         images: [],
         isLoaded: false
@@ -20,8 +26,48 @@ class ParkInfo extends Component {
 
     componentDidMount() {
         const { selectedPark, images } = this.props.location.state;
+        // const { parkId } =this.props.location.state.selectedPark;
         this.setState({ park: selectedPark, isLoaded: true });
         this.makeImgObj(images);
+    }
+
+    handleInputChange = (event) => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    };
+
+    getComments = () => {
+        console.log("getting comments", this.state.park.id)
+        axios("/get-comments", {
+            params: {
+                parkId: this.state.park.id
+            }
+        })
+            .then((res) => {
+                console.log(res.data);
+                const allComments = res.data;
+                console.log(allComments)
+                this.setState({ allComments })
+            }).catch(err => console.log(err))
+    }
+
+    postComment = (event) => {
+        event.preventDefault();
+        const { comments, userName, } = this.state;
+        const { id, fullName } = this.state.park;
+        const data = {
+            comments,
+            userName,
+            parkId: id,
+            parkName: fullName
+        }
+        axios.post("/post-comments", data)
+            .then((res) => {
+                console.log(res)
+                this.getComments();
+            }).catch(err => console.log(err))
     }
 
     printInfo = (obj) => {
@@ -34,9 +80,13 @@ class ParkInfo extends Component {
         return keyArr;
     }
 
+    selectCategory = (event) => {
+        event.preventDefault();
+        this.setState({ selected: event.target.textContent })
+    }
+
     makeImgObj = (images) => {
         if (images.length > 0) {
-            console.log("making obj")
             let items = []
             items = images.map((element) => (
                 {
@@ -46,7 +96,6 @@ class ParkInfo extends Component {
                     header: element.title
                 }
             ));
-            console.log(`map items ${items[0].src}`);
             this.setState({ images: items });
         }
     }
@@ -57,58 +106,48 @@ class ParkInfo extends Component {
             <Container>
                 <h1 className="heavy">Park Info</h1>
                 <Row>
-                    <Card className="col-md-12 infoCard">
+                    <Card className="col-md-12 infoCard mb-5">
                         <CardBody>
                             <CardTitle>{fullName}</CardTitle>
                             <CardSubtitle className="mb-3">{description}</CardSubtitle>
-                            {/* <img src={this.state.park.images[0].url}/> */}
-                            {this.state.isLoaded ?
-                                <React.Fragment>
-                                    <Row className="mb-3">
-                                        {/* <Col sm="12" md="6"> */}
-                                        <Col sm="12" md="7">
-                                            <h5>Park Hours:</h5>
-                                            {/* <p>{operatingHours[0].description}</p> */}
-                                            <Row>
-                                                <Col sm="12" md="7">
-                                                    <p>{operatingHours[0].description}</p>
-                                                </Col>
-                                                <Col sm="12" md="5">
-                                                    <ul>
-                                                        {this.printInfo(operatingHours[0].standardHours).map((element, i) => (
-                                                            <li key={i}>{element}</li>
-                                                        ))}
-                                                    </ul>
-                                                </Col>
-                                            </Row>
-                                        </Col>
-                                        <Col sm="12" md="5">
-                                            {/* <Row> */}
-                                            {/* <Col sm="12"> */}
-                                            <h5>{`${entranceFees[0].title} :`}</h5>
-                                            {/* <Row></Row> */}
-                                            <p>{`$${parseInt(entranceFees[0].cost).toFixed(2)} `}</p>
-                                            {/* </Col> */}
-                                            <Col sm="12" className="mt-5">
-                                                <h5>Additional Info :</h5>
-                                                <Address address={addresses} contacts={contacts} directionsUrl={directionsUrl} />
-                                            </Col>
-                                            {/* </Row> */}
-                                        </Col>
-                                    </Row>
-                                    {/* <Row>
-                                        <Col sm="12" md="6" className="mt-5">
-                                            <h5>Additional Info :</h5>
-                                            <Address address={addresses} contacts={contacts} directionsUrl={directionsUrl} />
-                                        </Col>
-                                    </Row> */}
-                                </React.Fragment> : ""
-                            }
+                            <Row className="d-flex justify-content-around mb-5">
+                                <Col sm="10" md="3">
+                                    <Button color="success" size="lg" data-state="" onClick={this.selectCategory} active>Images</Button>{' '}
+                                </Col>
+
+                                <Col sm="10" md="3">
+                                    <Button color="success" size="lg" data-state="" onClick={this.selectCategory} active>Comments</Button>{' '}
+                                </Col>
+
+                                <Col sm="10" md="3">
+                                    <Button color="success" size="lg" data-state="" onClick={this.selectCategory} active>Additional Info</Button>{' '}
+                                </Col>
+
+                            </Row>
                             <Row>
-                                {this.state.isLoaded ? images.map((element, i) => (
-                                    <ImgModal key={i} images={element} />
-                                    // <img key={i} className="infoImg d-flex justify-content-between mb-3 col-md-3" src={element.url} />
-                                )) : ""}
+                                {(this.state.isLoaded && (this.state.selected === "Images"))
+                                    ? images.map((element, i) => (
+                                        <ImgModal key={i} images={element} />
+                                    ))
+                                    : ""}
+
+                                {(this.state.isLoaded && (this.state.selected === "Additional Info"))
+                                    ? <AdditionalInfo
+                                        operatingHours={operatingHours}
+                                        entranceFees={entranceFees}
+                                        addresses={addresses}
+                                        contacts={contacts}
+                                        directionsUrl={directionsUrl}
+                                        printInfo={this.printInfo} /> : ""}
+
+                                {(this.state.isLoaded && (this.state.selected === "Comments"))
+                                    ? <Comments 
+                                        onChange={this.handleInputChange} 
+                                        getComments={this.getComments} 
+                                        postComment={this.postComment} 
+                                        allComments={this.state.allComments}
+                                        />
+                                    : ""}
                             </Row>
                         </CardBody>
                     </Card>

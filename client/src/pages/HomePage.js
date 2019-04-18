@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col} from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import axios from 'axios';
 import SearchBar from '../components/searchBar';
 import ParkCard from '../components/parkCard';
@@ -35,10 +35,8 @@ class HomePage extends Component {
             }
         }).then((res) => {
             this.setState({ isLoading: false })
-            // const parkArr = res.data.data;
-            //   this.props.getParks(parkArr)
-            this.setState({ parks: res.data.data });
-            // console.log(this.state.parks);
+            console.log(res.data)
+            this.setState({ parks: res.data });
         }).catch((err) => {
             console.log(err);
         })
@@ -74,7 +72,7 @@ class HomePage extends Component {
                     {(this.state.parks.length > 0) ?
                         this.state.parks.map((element, i) => (
                             <ParkCard key={this.state.parks[i].id} park={this.state.parks[i]} />))
-                        : (this.state.searched && !isLoading )? <ParkCard/> : ""}
+                        : (this.state.searched && !isLoading) ? <ParkCard /> : ""}
                 </Row>
             </Container>
         );

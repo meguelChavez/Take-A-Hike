@@ -1,5 +1,5 @@
 const express = require('express');
-const path = require('path');
+const mongoose = require('mongoose');
 require("dotenv").config();
 
 const app = express();
@@ -10,9 +10,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static('public'));
-// app.use((req, res) => {
-//   res.sendFile(path.join(__dirname, './public/index.html'));
-// });
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Take-A-Hike");
+
+
 require('./routes/api-routes')(app);
 
 app.listen(PORT, () => {
