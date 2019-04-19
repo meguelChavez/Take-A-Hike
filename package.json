@@ -12,6 +12,7 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
+  "homepage": "https://github.com/mc4tech/take-a-hike#readme",
   "keywords": [],
   "author": "",
   "license": "ISC",
