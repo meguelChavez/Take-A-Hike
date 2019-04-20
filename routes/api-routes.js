@@ -5,6 +5,10 @@ const db = require('../models');
 
 module.exports = (app) => {
 
+    app.get('/', function (req, res) {
+        res.sendFile(path.join(__dirname, '../public/index.html'));
+    });
+
     app.get("/search", (req, res) => {
         const { keyword, chosenSC } = req.query;
         const key = keys.natParkService.api_key
@@ -33,7 +37,7 @@ module.exports = (app) => {
     })
 
     app.get("/get-comments", (req, res) => {
-        const { parkId } = req.query; 
+        const { parkId } = req.query;
         db.Comments.find({ parkId })
             .then((data) => {
                 res.json(data)
