@@ -4,7 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import NavBar from './components/navBar';
 import HomePage from './pages/HomePage';
-import ParkInfo  from './pages/ParkInfo'
+import ParkInfo from './pages/ParkInfo';
+import Footer from './components/footer';
+
 
 
 class App extends Component {
@@ -18,9 +20,10 @@ class App extends Component {
           <NavBar />
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route exact path="/parkinfo" component={ParkInfo}/>
+            <Route exact path="/parkinfo" component={ParkInfo} />
           </Switch>
         </div>
+        <Footer />
       </Router>
     );
   }

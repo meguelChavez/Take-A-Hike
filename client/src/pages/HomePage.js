@@ -8,7 +8,7 @@ import ParkCard from '../components/parkCard';
 
 class HomePage extends Component {
     state = {
-        stateCode: ["AK","AR", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"],
+        stateCode: ["AK", "AR", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"],
         chosenSC: "",
         keyword: "",
         isLoading: false,
@@ -26,8 +26,6 @@ class HomePage extends Component {
     handleSearch = (event) => {
         this.setState({ isLoading: true, searched: true })
         const { keyword, chosenSC } = this.state;
-        console.log("clicked");
-        console.log(keyword, chosenSC)
         axios.get("/search", {
             params: {
                 keyword,
@@ -35,7 +33,6 @@ class HomePage extends Component {
             }
         }).then((res) => {
             this.setState({ isLoading: false })
-            console.log(res.data)
             this.setState({ parks: res.data });
         }).catch((err) => {
             console.log(err);

@@ -39,16 +39,13 @@ class ParkInfo extends Component {
     };
 
     getComments = () => {
-        console.log("getting comments", this.state.park.id)
         axios("/get-comments", {
             params: {
                 parkId: this.state.park.id
             }
         })
             .then((res) => {
-                console.log(res.data);
                 const allComments = res.data;
-                console.log(allComments)
                 this.setState({ allComments })
             }).catch(err => console.log(err))
     }
@@ -65,7 +62,6 @@ class ParkInfo extends Component {
         }
         axios.post("/post-comments", data)
             .then((res) => {
-                console.log(res)
                 this.getComments();
             }).catch(err => console.log(err))
     }
@@ -141,12 +137,12 @@ class ParkInfo extends Component {
                                         printInfo={this.printInfo} /> : ""}
 
                                 {(this.state.isLoaded && (this.state.selected === "Comments"))
-                                    ? <Comments 
-                                        onChange={this.handleInputChange} 
-                                        getComments={this.getComments} 
-                                        postComment={this.postComment} 
+                                    ? <Comments
+                                        onChange={this.handleInputChange}
+                                        getComments={this.getComments}
+                                        postComment={this.postComment}
                                         allComments={this.state.allComments}
-                                        />
+                                    />
                                     : ""}
                             </Row>
                         </CardBody>
