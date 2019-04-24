@@ -20,15 +20,10 @@ module.exports = (app) => {
             res.json(parks);
             parks.forEach((element => {
                 db.Parks.find({ fullName: element.fullName }).then((data) => {
-                    console.log("found");
                     if (data === undefined || data.length == 0) {
-                        console.log("not found")
                         db.Parks.create(element).then((data) => {
-                            console.log("creating new")
-                            console.log(data)
                         })
                     }
-                    console.log(data);
                 }).catch((err) => console.log(err))
             }))
         }).catch((err) => {
@@ -42,7 +37,6 @@ module.exports = (app) => {
         db.Comments.find({ parkId })
             .then((data) => {
                 res.json(data)
-                console.log(data);
             }).catch(function (err) {
                 res.json(err);
             })
@@ -58,11 +52,9 @@ module.exports = (app) => {
             })
     })
     app.post("/post-comments", (req, res) => {
-        console.log(req.body);
         db.Comments.create(req.body)
             .then((data) => {
                 res.json(data)
-                console.log(data);
             }).catch(function (err) {
                 res.json(err);
             })
