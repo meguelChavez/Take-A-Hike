@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { Row, Col, Button } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import Address from '../components/address';
 
 
 const AdditionalInfo = (props) => {
-
     return (
         <React.Fragment>
             <Row className="mb-3">

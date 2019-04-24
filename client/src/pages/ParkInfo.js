@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Button } from 'reactstrap';
-import InfoList from '../components/infoList';
 import AdditionalInfo from '../components/additionalInfo';
 import Comments from '../components/comments';
 import ImgModal from '../components/imgModal';
-import ImgCarousel from '../components/carousel';
 import {
     Card, CardBody,
     CardTitle, CardSubtitle
@@ -32,6 +30,7 @@ class ParkInfo extends Component {
     }
 
     handleInputChange = (event) => {
+        console.log(event.target);
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -62,16 +61,20 @@ class ParkInfo extends Component {
         }
         axios.post("/post-comments", data)
             .then((res) => {
+                this.setState({ comments: "", userName: "" })
                 this.getComments();
             }).catch(err => console.log(err))
     }
 
     printInfo = (obj) => {
-        let keyArr = []
+        let keyArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         for (let key in obj) {
             let keyStr = key;
             let firstLetterCap = keyStr.charAt(0).toUpperCase() + keyStr.slice(1);
-            keyArr.push(`${firstLetterCap}: ${obj[key]}`)
+            let found = keyArr.findIndex((element) => {
+                return element === firstLetterCap;
+            })
+            keyArr[found] = `${firstLetterCap}: ${obj[key]}`;
         }
         return keyArr;
     }
@@ -138,6 +141,8 @@ class ParkInfo extends Component {
 
                                 {(this.state.isLoaded && (this.state.selected === "Comments"))
                                     ? <Comments
+                                        userName={this.state.userName}
+                                        comments={this.state.comments}
                                         onChange={this.handleInputChange}
                                         getComments={this.getComments}
                                         postComment={this.postComment}

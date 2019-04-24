@@ -90,8 +90,8 @@
 }
 
 .infoImg{
-  width: auto;
-  height: 250px;
+  width: 100%;
+  height: 10em;
 }
 
 .imgModal{
@@ -99,9 +99,9 @@
   height: auto;
 }
 
-.modal-content{
-  width: 960px;
-}
+/* .modal-content{
+  width: 50em;
+} */
 
 .heavy{
   font-weight: 900
@@ -115,6 +115,11 @@
 .parks{
   display: flex;
   justify-content: space-around;
+}
+
+.commentsBox {
+  height: 20em;
+  overflow: auto;
 }
 
 ul{

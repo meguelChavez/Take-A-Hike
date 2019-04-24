@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import Moment from 'moment';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 export default class Comments extends React.Component {
     componentDidMount() {
@@ -19,12 +20,12 @@ export default class Comments extends React.Component {
                     </FormGroup>
                     <Button onClick={this.props.postComment}>Submit</Button>
                 </Form>
-                <div className="col-md-8">
+                <div className="col-md-8 commentsBox">
                     {(this.props.allComments.length > 0) ? this.props.allComments.map((element, i) => (
                         <React.Fragment key={element._id}>
                             <h5>{element.userName}</h5>
                             <p>{element.comments}</p>
-                            <h5>{element.createdAt}</h5>
+                            <h5>{Moment(element.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</h5>
                         </React.Fragment>
                     )) : ""
                     }

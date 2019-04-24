@@ -20,9 +20,9 @@ class ModalExample extends React.Component {
     render() {
         return (
             <div className="col-md-3">
-                <img alt={this.props.images.alt} onClick={this.toggle} className="infoImg d-flex justify-content-between mb-3 col-md-12" src={this.props.images.url} />
-                <Modal className="col-md-9" isOpen={this.state.modal} modalTransition={{ timeout: 700 }} backdropTransition={{ timeout: 1300 }}
-                    toggle={this.toggle} className={this.props.className}>
+                <img alt={this.props.images.alt} onClick={this.toggle} className="infoImg d-flex justify-content-between mb-3" src={this.props.images.url} />
+                <Modal className="col-md-12" isOpen={this.state.modal} modalTransition={{ timeout: 700 }} backdropTransition={{ timeout: 1300 }}
+                    toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>{this.props.images.caption}</ModalHeader>
                     <img alt={this.props.images.alt} onClick={this.toggle} className="imgModal" src={this.props.images.url} />
                 </Modal>
