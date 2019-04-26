@@ -46,7 +46,6 @@ module.exports = (app) => {
         db.Parks.create(req.body.data)
             .then((data) => {
                 res.json(data)
-                console.log(data);
             }).catch(function (err) {
                 res.json(err);
             })
