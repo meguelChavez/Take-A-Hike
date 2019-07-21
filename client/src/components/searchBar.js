@@ -67,21 +67,21 @@ class SearchBar extends Component {
               }}
             >
               {this.props.stateCode.map((element, index) => (
-                < DropdownItem 
-                  key={index} 
-                  name="chosenSC" 
-                  value={element} 
+                < DropdownItem
+                  key={index}
+                  name="chosenSC"
+                  value={element}
                   onClick={this.props.handleInputChange}>
-                    {element} 
+                  {element}
                 </DropdownItem>
               ))}
             </DropdownMenu>
           </InputGroupButtonDropdown>
-        { this.props.loading ? <LoadingBtn/> :
-          <Button 
-            ref="btn" 
-            className="ml-3 btn-success" 
-            onClick={this.props.handleSearch}
+          {this.props.loading ? <LoadingBtn /> :
+            <Button
+              ref="btn"
+              className="ml-3 btn-success"
+              onClick={this.props.handleSearch}
             >Search
           </Button>}
         </InputGroup>
