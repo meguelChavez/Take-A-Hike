@@ -24,6 +24,7 @@ class HomePage extends Component {
     };
 
     handleSearch = (event) => {
+        console.log("searching!!!")
         this.setState({ isLoading: true, searched: true })
         const { keyword, chosenSC } = this.state;
         axios.get("/search", {
@@ -32,12 +33,15 @@ class HomePage extends Component {
                 chosenSC
             }
         }).then((res) => {
+            console.log(res)
             this.setState({ isLoading: false })
             this.setState({ parks: res.data });
         }).catch((err) => {
             console.log(err);
         })
     }
+
+
 
     render() {
         const { stateCode, keyword, chosenSC, isLoading } = this.state;
@@ -65,6 +69,7 @@ class HomePage extends Component {
                         </p>
                     </Col>
                 </Row>
+
                 <Row className="parks">
                     {(this.state.parks.length > 0) ?
                         this.state.parks.map((element, i) => (
