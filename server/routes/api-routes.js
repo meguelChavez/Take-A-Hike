@@ -15,10 +15,7 @@ module.exports = (app) => {
     app.get("/search", (req, res) => {
         const { keyword, chosenSC } = req.query;
         const key = keys.natParkService.api_key
-        console.log(`************************`)
-        console.log(`*******${key}**********`)
-        console.log(`************************`)
-        // res.json({})
+
         const fields = "fields=addresses%2Cimages%2Ccontacts%2CweatherInfo%2CentranceFees%2CoperatingHours"
         const queryUrl = `https://developer.nps.gov/api/v1/parks?stateCode=${chosenSC}&q=${keyword}&${fields}&api_key=${key}`;
         axios.get(queryUrl).then((response) => {
@@ -28,13 +25,6 @@ module.exports = (app) => {
             res.json(parks);
             parks.forEach((element => {
                 db.Parks.find({ fullName: element.fullName }).then((data) => {
-                    console.log(`************************`)
-                    console.log(`*******Data**********`)
-                    console.log(`************************`)
-                    console.log(data)
-                    console.log(`************************`)
-                    console.log(`*******End Data**********`)
-                    console.log(`************************`)
                     if (data === undefined || data.length == 0) {
                         db.Parks.create(element).then((data) => {
                         })

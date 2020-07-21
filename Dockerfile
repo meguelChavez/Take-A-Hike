@@ -20,14 +20,20 @@ RUN yarn build
 
 FROM node:10.16-alpine
 
-WORKDIR /usr/src/app/
-COPY --from=client /usr/app/client/build/ ./client/build/
+# WORKDIR /usr/src/app/
+# COPY --from=client /usr/app/client/build/ ./client/build/
 
 WORKDIR /usr/src/app/server/
 COPY server/package*.json ./
 RUN npm install 
 COPY server/ ./
 
+# Copy build from client to server
+WORKDIR /usr/src/app/
+COPY --from=client /usr/app/client/build/ ./server/client/build/
+
+# Set PORT, expose and start app
+WORKDIR /usr/src/app/server/
 ENV PORT 8080
 
 EXPOSE 8080

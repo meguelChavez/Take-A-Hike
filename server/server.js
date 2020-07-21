@@ -10,25 +10,30 @@ const PORT = process.env.PORT || 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static('../client/public'));
+// app.use(express.static('../client/public'));
 
 
 require('./routes/api-routes')(app);
 
+console.log(`*********************`)
+console.log(process.env)
+console.log(`*********************`)
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("../client/build"));
+  console.log("******PRODUCTION*****")
+  // console.log(process.env)
+  // app.use(express.static("../client/build"));
+  // app.use('*', (request, response) => {
+  //   console.log(`************************`)
+  //   console.log(`*******App use**********`)
+  //   console.log(`************************`)
+  //   response.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  // });
 }
-
-app.use('*', (request, response) => {
-  console.log(`************************`)
-  console.log(`*******App use**********`)
-  console.log(`************************`)
-  response.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+app.use(express.static("./client/build"));
+app.use('/', (request, response) => {
+  response.sendFile(path.join(__dirname, './client/build', 'index.html'));
 });
 
-console.log(`************************`)
-console.log(`*******${PORT}**********`)
-console.log(`************************`)
 
 const options = {
   useNewUrlParser: true,
@@ -49,6 +54,8 @@ const {
 const dbConnectionURL = {
   'LOCALURL': `mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`
 };
+
+
 
 mongoose.connect(dbConnectionURL.LOCALURL, options);
 // mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Take-A-Hike",
