@@ -20,8 +20,6 @@ module.exports = (app) => {
         const queryUrl = `https://developer.nps.gov/api/v1/parks?stateCode=${chosenSC}&q=${keyword}&${fields}&api_key=${key}`;
         axios.get(queryUrl).then((response) => {
             const parks = response.data.data;
-            console.log(queryUrl)
-            console.log(response.data.data)
             res.json(parks);
             parks.forEach((element => {
                 db.Parks.find({ fullName: element.fullName }).then((data) => {
@@ -34,7 +32,7 @@ module.exports = (app) => {
         }).catch((err) => {
             console.log(err)
         });
-        // res.json("{success: 200}");
+
     })
 
     app.get("/get-comments", (req, res) => {
