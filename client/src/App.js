@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import NavBar from './components/navBar';
+import NavBar from './components/Nav/navBar';
 import HomePage from './pages/HomePage';
 import ParkInfo from './pages/ParkInfo';
-import Footer from './components/footer';
+import Footer from './components/Footer/footer';
 
 
 

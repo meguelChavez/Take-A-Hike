@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import axios from 'axios';
-import SearchBar from '../components/searchBar';
-import ParkCard from '../components/parkCard';
+import SearchBar from '../components/Forms/searchBar';
+import ParkCard from '../components/Cards/parkCard';
 
 
 

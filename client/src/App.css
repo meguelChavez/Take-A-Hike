@@ -6,14 +6,15 @@
   background-size: contain;
 } */
 
-#root{
-  height: 100vh;
-    background-image: url('./assets/images/daylight-environment-forest-459225.jpg');
-    background-position: center; 
-    background-repeat: no-repeat;
-    text-align: center;
-    background-size: cover;  
-    /* background-attachment: fixed; */
+.App{
+  height: 94vh;
+  overflow:auto;
+  background-image: url('./assets/images/daylight-environment-forest-459225.jpg');
+  background-position: center; 
+  background-repeat: no-repeat;
+  text-align: center;
+  background-size: cover;  
+  /* background-attachment: fixed; */
 }
 
 .navbar-brand{

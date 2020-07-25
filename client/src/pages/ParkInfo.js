@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Button } from 'reactstrap';
 import AdditionalInfo from '../components/additionalInfo';
-import Comments from '../components/comments';
-import ImgModal from '../components/imgModal';
+import Comments from '../components/Forms/comments';
+import ImgModal from '../components/Modal/imgModal';
 import {
     Card, CardBody,
     CardTitle, CardSubtitle
