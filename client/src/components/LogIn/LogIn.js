@@ -97,9 +97,9 @@ const LogIn = props => {
             </p> */}
             <Row>
               {register ? (
-                <RegisterForm toggle={props.toggle} />
+                <RegisterForm setModal={props.setModal} checkAuth={props.checkAuth} toggle={props.toggle} />
               ) : (
-                <LoginForm toggle={props.toggle} />
+                <LoginForm setModal={props.setModal} checkAuth={props.checkAuth} toggle={props.toggle} />
               )}
             </Row>
           </CardBody>

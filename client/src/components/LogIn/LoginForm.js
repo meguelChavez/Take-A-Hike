@@ -32,6 +32,8 @@ const LoginForm = props => {
       console.log(res);
       if (res.data.success) {
         props.toggle("isAuthed", true);
+        props.setModal(false)
+        props.checkAuth()
         const path = `/dashboard`;
         history.push(path);
       }

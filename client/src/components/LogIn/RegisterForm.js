@@ -8,12 +8,8 @@ import {
 import * as Yup from "yup";
 import {
   Button,
-  Container,
-  Row,
-  Col,
   Form,
   FormGroup,
-  Label,
   Alert,
   Input
 } from "reactstrap";
@@ -39,6 +35,8 @@ const RegisterForm = props => {
         setVisible(true);
       } else {
         props.toggle("isAuthed", true);
+        props.setModal(false)
+        props.checkAuth()
         // const path = `/repos/${userName}/${repo}`;
         const path = `/dashboard`;
         history.push(path);

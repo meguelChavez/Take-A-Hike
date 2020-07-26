@@ -68,7 +68,7 @@ const NavBar = (props) => {
                 </Container>
             </Navbar>
             <GenModal modal={modal} register={register} setRegister={setRegister} setModal={setModal}>
-                <LogIn register={register} toggleRegister={toggleRegister} footer={false} />
+                <LogIn register={register} toggleRegister={toggleRegister} toggle={props.toggle} footer={false} setModal={setModal} checkAuth={props.checkAuth} />
             </GenModal>
         </div>
     );
