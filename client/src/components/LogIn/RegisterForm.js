@@ -38,8 +38,8 @@ const RegisterForm = props => {
         props.setModal(false)
         props.checkAuth()
         // const path = `/repos/${userName}/${repo}`;
-        const path = `/dashboard`;
-        history.push(path);
+        // const path = `/dashboard`;
+        // history.push(path);
       }
       console.log(res);
     } catch (err) {

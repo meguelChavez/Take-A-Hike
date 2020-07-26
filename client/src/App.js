@@ -13,7 +13,8 @@ import Footer from './components/Footer/footer';
 class App extends Component {
   state = {
     isOpen: false,
-    isAuthed: false
+    isAuthed: false,
+    user: null
   }
 
   componentDidMount() {
@@ -55,18 +56,24 @@ class App extends Component {
   };
 
   render() {
+    const { isAuthed, user } = this.state
     return (
       <Router>
         <div className="App">
           <NavBar
-            isAuthed={this.state.isAuthed}
+            isAuthed={isAuthed}
             handleLogoutClick={this.handleLogoutClick}
             toggle={this.toggle}
             checkAuth={this.checkAuth}
           />
           <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/parkinfo" component={ParkInfo} />
+            <Route exact path="/" render={() => <HomePage user={user} isAuthed={isAuthed} />} />
+            <Route exact path="/parkinfo"
+              render={(props) => <ParkInfo {...props} user={user}
+                isAuthed={isAuthed}
+              />}
+            // component={ParkInfo}
+            />
           </Switch>
         </div>
         <Footer />

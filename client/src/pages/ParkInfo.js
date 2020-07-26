@@ -23,10 +23,12 @@ class ParkInfo extends Component {
     };
 
     componentDidMount() {
-        const { selectedPark, images } = this.props.location.state;
-        // const { parkId } =this.props.location.state.selectedPark;
-        this.setState({ park: selectedPark, isLoaded: true });
-        this.makeImgObj(images);
+        if (this.props.location) {
+            const { selectedPark, images } = this.props.location.state;
+            // const { parkId } =this.props.location.state.selectedPark;
+            this.setState({ park: selectedPark, isLoaded: true });
+            this.makeImgObj(images);
+        }
     }
 
     handleInputChange = (event) => {
@@ -50,19 +52,21 @@ class ParkInfo extends Component {
 
     postComment = (event) => {
         event.preventDefault();
-        const { comments, userName, } = this.state;
-        const { id, fullName } = this.state.park;
-        const data = {
-            comments,
-            userName,
-            parkId: id,
-            parkName: fullName
+        if (this.props.isAuthed && this.props.user) {
+            const { comments, userName, } = this.state;
+            const { id, fullName } = this.state.park;
+            const data = {
+                comments,
+                userName,
+                parkId: id,
+                parkName: fullName
+            }
+            axios.post("/post-comments", data)
+                .then((res) => {
+                    this.setState({ comments: "", userName: "" })
+                    this.getComments();
+                }).catch(err => console.log(err))
         }
-        axios.post("/post-comments", data)
-            .then((res) => {
-                this.setState({ comments: "", userName: "" })
-                this.getComments();
-            }).catch(err => console.log(err))
     }
 
     printInfo = (obj) => {
