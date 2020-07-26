@@ -9,18 +9,22 @@ import {
     NavLink,
     Container
 } from 'reactstrap';
+import GenModal from '../Modal/genMondal';
+import LogIn from '../LogIn/LogIn';
 
 const NavBar = (props) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [modal, setModal] = useState(false)
+    const [register, setRegister] = useState(false)
 
-    const toggle = () => setIsOpen(!isOpen);
+    const toggleRegister = () => setRegister(!register)
 
     return (
         <div>
             <Navbar dark expand="sm" className="mb-5">
                 <Container>
                     <NavbarBrand href="/">Take-A-Hike</NavbarBrand>
-                    <NavbarToggler onClick={toggle} />
+                    <NavbarToggler onClick={() => setIsOpen(!isOpen)} />
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             {props.isAuthed ? (
@@ -35,7 +39,10 @@ const NavBar = (props) => {
                                             <NavLink
                                                 href="#"
                                                 name="loginForm"
-                                                onClick={() => props.toggle("loginForm", true)}
+                                                onClick={() => {
+                                                    setRegister(true)
+                                                    setModal(true)
+                                                }}
                                             >
                                                 Register
                                             </NavLink>
@@ -44,7 +51,10 @@ const NavBar = (props) => {
                                             <NavLink
                                                 href="#"
                                                 name="loginForm"
-                                                onClick={() => props.toggle("loginForm", true)}
+                                                onClick={() => {
+                                                    setRegister(false)
+                                                    setModal(true)
+                                                }}
                                             >
                                                 Log In
                                             </NavLink>
@@ -57,6 +67,9 @@ const NavBar = (props) => {
                     </Collapse>
                 </Container>
             </Navbar>
+            <GenModal modal={modal} register={register} setRegister={setRegister} setModal={setModal}>
+                <LogIn register={register} toggleRegister={toggleRegister} footer={false} />
+            </GenModal>
         </div>
     );
 }

@@ -157,6 +157,7 @@ const RegisterForm = props => {
                   disabled={isSubmitting}
                   color="primary"
                   size="lg"
+                  className="col"
                 >
                   Submit
                 </Button>

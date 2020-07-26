@@ -28,8 +28,8 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
 const LogIn = props => {
-  const [register, toggleRegister] = useState(false);
-
+  // const [register, toggleRegister] = useState(false);
+  const {register} = props
   const handleSignInClick = name => {
     // Authenticate using via passport api in the backend
     // Open Twitter login page
@@ -51,11 +51,12 @@ const LogIn = props => {
   return (
     <React.Fragment>
       <Row className="d-flex justify-content-center">
-        <Card className="col-4 pl-0 pr-0 mb-3">
-          <CardTitle className="mt-3 ">{`${
+        <Card className="col-12 pl-0 pr-0 mb-3" style={{boxShadow:'none', height: '32rem', border: 'none'}}>
+          <CardTitle className="mt-3 text-center" style={{textShadow:'none'}}>{`${
             register ? "Register" : "Log In"
-          } with:`}</CardTitle>
+          }`}</CardTitle>
           <CardBody>
+{/*             
             <Row className="justify-content-around">
               <Col>
                 <Button
@@ -91,9 +92,9 @@ const LogIn = props => {
                 </Button>
               </Col>
             </Row>
-            <p className=" separator t-center">
+            <p className=" separator text-center">
               <span>OR</span>
-            </p>
+            </p> */}
             <Row>
               {register ? (
                 <RegisterForm toggle={props.toggle} />
@@ -113,7 +114,7 @@ const LogIn = props => {
                       className="registerLink"
                       role="button"
                       onClick={e => {
-                        toggleRegister(true);
+                        props.toggleRegister(true);
                       }}
                     >
                       Register
@@ -126,7 +127,7 @@ const LogIn = props => {
                       className="registerLink"
                       role="button"
                       onClick={e => {
-                        toggleRegister(false);
+                        props.toggleRegister(false);
                       }}
                     >
                       Log In

@@ -119,6 +119,7 @@ const LoginForm = props => {
                   disabled={isSubmitting}
                   color="primary"
                   size="lg"
+                  className='col'
                 >
                   Submit
                 </Button>
