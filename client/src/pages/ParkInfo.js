@@ -52,6 +52,7 @@ class ParkInfo extends Component {
 
     postComment = (event) => {
         event.preventDefault();
+        console.log('posting!!!')
         if (this.props.isAuthed && this.props.user) {
             const { comments, userName, } = this.state;
             const { id, fullName } = this.state.park;
@@ -63,6 +64,7 @@ class ParkInfo extends Component {
             }
             axios.post("/post-comments", data)
                 .then((res) => {
+                    console.log(res)
                     this.setState({ comments: "", userName: "" })
                     this.getComments();
                 }).catch(err => console.log(err))
